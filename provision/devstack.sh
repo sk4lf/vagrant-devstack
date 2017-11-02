@@ -4,7 +4,7 @@
 # Variables
 #--------------------------------------------------------------
 ADMIN_PASSWORD=secret
-HOST_IP=`ifconfig enp0s3 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
+HOST_IP=`ifconfig enp0s8 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
 #--------------------------------------------------------------
 
 #--------------------------------------------------------------
@@ -53,6 +53,7 @@ sudo -u stack git clone https://git.openstack.org/openstack-dev/devstack /opt/st
 
 sudo -u stack cat << EOF > /opt/stack/devstack/local.conf
 [[local|localrc]]
+#FLAT_INTERFACE=enp0s3
 HOST_IP=$HOST_IP
 ADMIN_PASSWORD=$ADMIN_PASSWORD
 DATABASE_PASSWORD=$ADMIN_PASSWORD
@@ -60,5 +61,8 @@ RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 EOF
 
-sudo -u stack /opt/stack/devstack/./stack.sh
+#sudo su - stack
+#cd /opt/stack/devstack
+#./stack.sh
+sudo su - stack -c 'cd ~/devstack && ./stack.sh'
 #--------------------------------------------------------------

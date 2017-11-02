@@ -1,5 +1,5 @@
 ---
 - name: "devstack"
-  ip: "10.0.2.15"
+  ip: "10.20.0.10"
   box: "ubuntu/xenial64"
   bootstrap: "devstack.sh"
